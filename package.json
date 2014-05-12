@@ -1,0 +1,15 @@
+{
+  "name": "linter-xmllint",
+  "linter-package": true,
+  "activationEvents": [],
+  "main": "./lib/init",
+  "version": "0.0.0",
+  "description": "Lint XML on the fly, using xmllint (not yet ready)",
+  "repository": "https://github.com/AtomLinter/linter-xmllint",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
