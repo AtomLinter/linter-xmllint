@@ -4,7 +4,7 @@
   "activationEvents": [],
   "main": "./lib/init",
   "version": "0.0.2",
-  "description": "Lint XML on the fly, using xmllint (not yet ready)",
+  "description": "Lint XML on the fly, using xmllint",
   "repository": "https://github.com/AtomLinter/linter-xmllint",
   "license": "MIT",
   "engines": {
