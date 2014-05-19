@@ -10,7 +10,7 @@ class LinterXmllint extends Linter
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
-  cmd: 'xmllint --noout'
+  cmd: 'xmllint --noout @filename 2>&1'
 
   linterName: 'xmllint'
 
