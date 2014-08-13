@@ -34,3 +34,6 @@ Once `xmllint` is installed, you must ensure it is in your system PATH so that L
 - [linter-csslint](https://atom.io/packages/linter-csslint) Linter plugin for CSS, using csslint.
 - [linter-rubocop](https://atom.io/packages/linter-rubocop) - Linter plugin for Ruby, using rubocop.
 - [linter-tslint](https://atom.io/packages/linter-tslint) Linter plugin for TypeScript, using tslint.
+
+## Donation
+[![Share the love!](https://chewbacco-stuff.s3.amazonaws.com/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXUYS4ARNHCN8)
