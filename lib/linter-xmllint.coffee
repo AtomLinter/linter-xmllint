@@ -29,10 +29,11 @@ class LinterXmllint extends Linter
   constructor: (editor)->
     super(editor)
 
-    atom.config.observe 'linter-xmllint.xmllintExecutablePath', =>
+    @configSubscription = atom.config.observe 'linter-xmllint.xmllintExecutablePath', =>
       @executablePath = atom.config.get 'linter-xmllint.xmllintExecutablePath'
 
   destroy: ->
-    atom.config.unobserve 'linter-xmllint.xmllintExecutablePath'
+    super
+    @configSubscription.dispose()
 
 module.exports = LinterXmllint
