@@ -1,6 +1,8 @@
 module.exports =
-  configDefaults:
-    xmllintExecutablePath: null
+  config:
+    xmllintExecutablePath:
+      type: 'string'
+      default: ''
 
   activate: ->
     console.log 'activate linter-xmllint'
