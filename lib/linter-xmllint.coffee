@@ -33,6 +33,7 @@ class LinterXmllint extends Linter
       @executablePath = atom.config.get 'linter-xmllint.xmllintExecutablePath'
 
   destroy: ->
+    super
     @executablePathListener.dispose()
 
 module.exports = LinterXmllint
