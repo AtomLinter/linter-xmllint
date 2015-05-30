@@ -4,7 +4,7 @@ Linter = require "#{linterPath}/lib/linter"
 class LinterXmllint extends Linter
   # The syntax that the linter handles. May be a string or
   # list/tuple of strings. Names should be all lowercase.
-  @syntax: ['text.xml']
+  @syntax: ['text.xml', 'text.xml.xsl', 'text.xml.rng']
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
