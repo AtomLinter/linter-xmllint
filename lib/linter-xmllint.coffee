@@ -2,17 +2,19 @@ linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
 
 class LinterXmllint extends Linter
-  # ConfigObserver.includeInto(this)
-
   # The syntax that the linter handles. May be a string or
   # list/tuple of strings. Names should be all lowercase.
-  @syntax: 'text.xml'
+  @syntax: ['text.xml']
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
   cmd: 'xmllint --noout'
 
+  executablePath: null
+
   linterName: 'xmllint'
+
+  errorStream: 'stderr'
 
   # A regex pattern used to extract information from the executable's output.
   regex:
@@ -22,18 +24,15 @@ class LinterXmllint extends Linter
     '.*?' +
     '(?<col>[^\\^]*)\\^'
 
-  errorStream: 'stderr'
-
   regexFlags: 's'
 
-  constructor: (editor)->
+  constructor: (editor) ->
     super(editor)
 
-    @configSubscription = atom.config.observe 'linter-xmllint.xmllintExecutablePath', =>
+    @executablePathListener = atom.config.observe 'linter-xmllint.xmllintExecutablePath', =>
       @executablePath = atom.config.get 'linter-xmllint.xmllintExecutablePath'
 
   destroy: ->
-    super
-    @configSubscription.dispose()
+    @executablePathListener.dispose()
 
 module.exports = LinterXmllint
