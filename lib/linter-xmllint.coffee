@@ -22,7 +22,7 @@ class LinterXmllint extends Linter
     '(?<line>\\d+):.+?: ' +
     '(?<message>[^\\r\\n]+).*?' +
     '.*?' +
-    '(?<col>[^\\^]*)\\^'
+    '(?<col>\\d+)*'
 
   regexFlags: 's'
 
