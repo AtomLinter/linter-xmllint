@@ -1,6 +1,5 @@
 {
   "name": "linter-xmllint",
-  "linter-package": true,
   "main": "./lib/init",
   "version": "0.0.7",
   "description": "Lint XML on the fly, using xmllint",
@@ -9,5 +8,15 @@
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "atom-linter": "^3.3.0",
+    "xregexp": "^2.0.0"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  }
 }
