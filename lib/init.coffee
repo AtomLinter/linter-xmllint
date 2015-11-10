@@ -9,6 +9,8 @@ module.exports =
       title: 'xmllint Executable Path'
       default: 'xmllint'
   activate: ->
+    require('atom-package-deps').install()
+
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-xmllint.executablePath',
       (executablePath) =>
