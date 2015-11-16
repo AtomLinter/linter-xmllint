@@ -14,9 +14,15 @@
     "sax": "^1.1.4",
     "xregexp": "^2.0.0"
   },
+  "devDependencies": {
+    "coffeelint": "^1.13.1"
+  },
   "package-deps": [
     "linter"
   ],
+  "scripts": {
+    "lint": "./node_modules/.bin/coffeelint lib spec"
+  },
   "providedServices": {
     "linter": {
       "versions": {
