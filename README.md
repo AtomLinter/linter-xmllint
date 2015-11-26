@@ -1,8 +1,15 @@
 # linter-xmllint
 
+[![Build Status](https://img.shields.io/travis/AtomLinter/linter-xmllint.svg)](https://travis-ci.org/AtomLinter/linter-xmllint)
+[![Plugin installs!](https://img.shields.io/apm/dm/linter-xmllint.svg)](https://atom.io/packages/linter-xmllint)
+[![Package version!](https://img.shields.io/apm/v/linter-xmllint.svg)](https://atom.io/packages/linter-xmllint)
+[![Dependencies!](https://img.shields.io/david/AtomLinter/linter-xmllint.svg)](https://david-dm.org/AtomLinter/linter-xmllint)
+
 > xmllint — The xmllint program parses XML files. It is useful for detecting errors XML code. See [xmlsoft.org/xmllint.html](http://xmlsoft.org/xmllint.html) for more informations about xmllint.
 
 This package will lint your opened `.xml` files in Atom through [xmllint linter](http://xmlsoft.org/xmllint.html). **It will only lint on save**.
+
+The [changelog](https://github.com/AtomLinter/linter-xmllint/blob/master/CHANGELOG.md) lists the changes for each release.
 
 ## Linter installation
 
