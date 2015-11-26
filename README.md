@@ -7,7 +7,7 @@
 
 > xmllint — The xmllint program parses XML files. It is useful for detecting errors XML code. See [xmlsoft.org/xmllint.html](http://xmlsoft.org/xmllint.html) for more informations about xmllint.
 
-This package will lint your opened `.xml` files in Atom through [xmllint linter](http://xmlsoft.org/xmllint.html). **It will only lint on save**.
+This package will lint your opened `.xml` files in Atom through [xmllint linter](http://xmlsoft.org/xmllint.html).
 
 The [changelog](https://github.com/AtomLinter/linter-xmllint/blob/master/CHANGELOG.md) lists the changes for each release.
 
