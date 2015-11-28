@@ -1,9 +1,21 @@
 {CompositeDisposable} = require 'atom'
-fs = require('fs')
 helpers = require 'atom-linter'
 path = require('path')
 sax = require('sax')
+Readable = require('stream').Readable
 XRegExp = require('xregexp').XRegExp
+
+class ReadableString extends Readable
+
+  constructor: (@content, options) ->
+    super options
+
+  _read: (size) ->
+    if not @content
+      @push null
+    else
+      @push(@content.slice(0, size))
+      @content = @content.slice(size)
 
 module.exports =
 
@@ -67,7 +79,7 @@ module.exports =
       parser = sax.createStream(strict)
       # use a low value for the highWaterMark
       # since we can't abort parsing what has already been read
-      stream = fs.createReadStream(textEditor.getPath(), {highWaterMark: 128})
+      stream = new ReadableString(textEditor.getText(), {highWaterMark: 128})
 
       parser.ondoctype = (doctype) ->
         hasDtd = true
@@ -87,9 +99,9 @@ module.exports =
           if parts.length is 2
             schemaUrl = parts[1]
 
-        # stop reading more data from the file
+        # stop reading more data
         stream.unpipe()
-        stream.close()
+        stream.content = ''
 
         if not hasDtd and not schemaUrl
           resolve([])
