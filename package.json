@@ -12,6 +12,7 @@
     "atom-linter": "^4.1.1",
     "atom-package-deps": "^3.0.0",
     "sax": "^1.1.4",
+    "xmldoc": "^0.4.0",
     "xregexp": "^3.0.0"
   },
   "devDependencies": {

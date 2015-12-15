@@ -3,6 +3,7 @@ helpers = require 'atom-linter'
 path = require('path')
 sax = require('sax')
 Readable = require('stream').Readable
+xmldoc = require('xmldoc')
 XRegExp = require('xregexp').XRegExp
 
 class ReadableString extends Readable
@@ -71,6 +72,7 @@ module.exports =
   checkValid: (textEditor) ->
     # if the document is well formed it must have a root node
     linter = this
+    firstOpenTag = true
     hasDtd = false
     schemaUrl = undefined
 
@@ -81,28 +83,55 @@ module.exports =
       # since we can't abort parsing what has already been read
       stream = new ReadableString(textEditor.getText(), {highWaterMark: 128})
 
+      parser.onprocessinginstruction = (procInst) ->
+        if procInst.name isnt 'xml-model'
+          return
+        # only use first schema
+        if schemaUrl
+          return
+
+        # parse attributes from body
+        try
+          xmlDoc = new xmldoc.XmlDocument('<body ' + procInst.body + '/>')
+        catch
+          return
+        attributes = xmlDoc.attr
+        if not attributes
+          return
+
+        # ignore if group is not empty
+        if 'group' of attributes and attributes['group']
+          return
+
+        if 'schematypens' of attributes and 'href' of attributes
+          if attributes['schematypens'] is 'http://www.w3.org/2001/XMLSchema'
+            schemaUrl = attributes['href']
+
       parser.ondoctype = (doctype) ->
         hasDtd = true
 
       parser.onopentag = (node) ->
-        # only consider the first tag
-        if schemaUrl?
+        # only handle first open tag
+        if not firstOpenTag
           return
+        firstOpenTag = false
 
-        # try to extract schema url
-        schemaUrl = false
-        if 'xsi:noNamespaceSchemaLocation' of node.attributes
-          schemaUrl= node.attributes['xsi:noNamespaceSchemaLocation']
-        else if 'xsi:schemaLocation' of node.attributes
-          schemaLocation = node.attributes['xsi:schemaLocation']
-          parts = schemaLocation.split /\s+/
-          if parts.length is 2
-            schemaUrl = parts[1]
-
-        # stop reading more data
+        # stop reading more data after the first tag
         stream.unpipe()
         stream.content = ''
 
+        # only check for attributes if not already specified as xml-model
+        if not schemaUrl
+          # try to extract schema url from attributes
+          if 'xsi:noNamespaceSchemaLocation' of node.attributes
+            schemaUrl= node.attributes['xsi:noNamespaceSchemaLocation']
+          else if 'xsi:schemaLocation' of node.attributes
+            schemaLocation = node.attributes['xsi:schemaLocation']
+            parts = schemaLocation.split /\s+/
+            if parts.length is 2
+              schemaUrl = parts[1]
+
+        # trigger validation
         if not hasDtd and not schemaUrl
           resolve([])
         if hasDtd and not schemaUrl

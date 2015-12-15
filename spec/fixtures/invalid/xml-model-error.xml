@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<?xml-model href="../note.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<note xmlns="http://www.w3schools.com">
+  <to id="">Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+  <footer/>
+</note>
