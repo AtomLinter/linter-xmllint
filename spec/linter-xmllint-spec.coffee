@@ -48,6 +48,10 @@ describe 'The xmllint provider for Linter', ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 0
     waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/valid/xml-model.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 0
+    waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/valid/all.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 0
@@ -81,6 +85,10 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/dtd-error.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 2
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/invalid/xml-model-error.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 1
 
   # describe('checks bad.php and', () => {
   #   let editor = null;
