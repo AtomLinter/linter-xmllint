@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.2.0 (Dec 14 2015)
+
+* Add support for *lintOnFlyAdd* option ([#32](https://github.com/AtomLinter/linter-xmllint/pull/32))
+* Add support for *xml-model* processing instruction to specify the *XML schema definition* ([#34](https://github.com/AtomLinter/linter-xmllint/pull/34))
+
 ## 1.1.0 (Nov 14 2015)
 
 * Add validation based on *document type definition* (`.dtd`) and *XML schema definition* (`.xsd`) files ([#28](https://github.com/AtomLinter/linter-xmllint/pull/28))
