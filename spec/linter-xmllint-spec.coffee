@@ -55,6 +55,10 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/valid/all.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 0
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/valid/relax.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 0
 
   it 'finds something wrong with invalid files', ->
     waitsForPromise ->
@@ -89,48 +93,11 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/xml-model-error.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
-
-  # describe('checks bad.php and', () => {
-  #   let editor = null;
-  #   beforeEach(() => {
-  #     waitsForPromise(() => {
-  #       return atom.workspace.open(__dirname + '/files/bad.php').then(openEditor => {
-  #         editor = openEditor;
-  #       });
-  #     });
-  #   });
-
-  #   it('finds at least one message', () => {
-  #     waitsForPromise(() => {
-  #       return lint(editor).then(messages => {
-  #         expect(messages.length).toEqual(1);
-  #       });
-  #     });
-  #   });
-
-  #   it('verifies that message', () => {
-  #     waitsForPromise(() => {
-  #       return lint(editor).then(messages => {
-  #         expect(messages[0].type).toBeDefined();
-  #         expect(messages[0].type).toEqual('Error');
-  #         expect(messages[0].text).toBeDefined();
-  #         expect(messages[0].text).toEqual('syntax error, unexpected \'{\' in -');
-  #         expect(messages[0].filePath).toBeDefined();
-  #         expect(messages[0].filePath).toMatch(/.+bad\.php$/);
-  #         expect(messages[0].range).toBeDefined();
-  #         expect(messages[0].range.length).toEqual(2);
-  #         expect(messages[0].range).toEqual([[1, 0], [1, 6]]);
-  #       });
-  #     });
-  #   });
-  # });
-
-  # it('finds nothing wrong with a valid file', () => {
-  #   waitsForPromise(() => {
-  #     return atom.workspace.open(__dirname + '/files/good.php').then(editor => {
-  #       return lint(editor).then(messages => {
-  #         expect(messages.length).toEqual(0);
-  #       });
-  #     });
-  #   });
-  # })
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/invalid/relax-errors.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 2
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/invalid/multiple-errors.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 3
