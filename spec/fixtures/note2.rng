@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<element name="note" xmlns="http://relaxng.org/ns/structure/1.0">
+  <element name="to">
+    <text/>
+  </element>
+  <element name="from">
+    <text/>
+  </element>
+  <element name="heading">
+    <text/>
+  </element>
+  <element name="footer">
+    <text/>
+  </element>
+</element>

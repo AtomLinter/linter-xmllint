@@ -8,5 +8,6 @@
   <to>Tove</to>
   <from>Jani</from>
   <heading>Reminder</heading>
-  <body id="">Don't forget me this weekend!</body>
+  <body id="body">Don't forget me this weekend!</body>
+  <footer/>
 </note>

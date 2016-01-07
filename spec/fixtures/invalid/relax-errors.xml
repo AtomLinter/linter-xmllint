@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<?xml-model href="../note.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../note2.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+  <footer/>
+</note>

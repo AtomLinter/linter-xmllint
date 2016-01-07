@@ -7,3 +7,4 @@
 <!ELEMENT from (#PCDATA)>
 <!ELEMENT heading (#PCDATA)>
 <!ELEMENT body (#PCDATA)>
+<!ATTLIST body id CDATA #IMPLIED>
