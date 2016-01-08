@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron">
+  <title>Dog testing 1</title>
+  <pattern id="obedience-school">
+    <rule context="dog">
+      <assert test="bone">Give that dog a bone!</assert>
+      <report test="flea">Your dog has fleas!</report>
+    </rule>
+  </pattern>
+</schema>

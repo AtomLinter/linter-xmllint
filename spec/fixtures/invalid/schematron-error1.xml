@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<?xml-model href="../schematron.xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<dog>
+<flea/>
+<flea/>
+<bone/>
+</dog>
