@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron">
+  <title>Note testing</title>
+  <pattern id="pattern-id">
+    <rule context="note">
+      <assert test="from">Note must have a "from"</assert>
+      <assert test="to">Note must have a "to"</assert>
+      <report test="cc">Note must not have a "cc"</report>
+    </rule>
+  </pattern>
+</schema>

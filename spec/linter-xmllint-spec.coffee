@@ -59,6 +59,10 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/valid/relax.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 0
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/valid/schematron.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 0
 
   it 'finds something wrong with invalid files', ->
     waitsForPromise ->
@@ -101,3 +105,7 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/multiple-errors.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 3
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/invalid/schematron-errors.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 2

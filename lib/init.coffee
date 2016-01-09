@@ -111,6 +111,11 @@ module.exports =
               arg: '--relaxng'
               url: attributes['href']
             })
+          if attributes['schematypens'] is 'http://purl.oclc.org/dsdl/schematron'
+            schemas.push({
+              arg: '--schematron'
+              url: attributes['href']
+            })
 
       parser.ondoctype = (doctype) ->
         hasDtd = true
@@ -180,8 +185,11 @@ module.exports =
         return messages
 
   validateSchema: (textEditor, argSchemaType, schemaUrl) ->
-    filePath = textEditor.getPath()
-    params = ['--noout', argSchemaType, schemaUrl, '-']
+    params = []
+    # --noout results in no error messages to be printed for schematron
+    if argSchemaType is not '--schematron'
+      params.push('--noout')
+    params = params.concat([argSchemaType, schemaUrl, '-'])
     options = {
       # since the schema might be relative exec in the directory of the xml file
       cwd: path.dirname(textEditor.getPath())
@@ -189,16 +197,19 @@ module.exports =
       stream: 'stderr'
     }
     return helpers.exec(@executablePath, params, options)
-      .then (output) ->
-        regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
-        helpers.parse(output, regex).map (error) ->
-          error.type = 'Error'
-          error.text = error.text + ' (' + schemaUrl + ')'
-          error.filePath = textEditor.getPath()
+      .then (output) =>
+        if argSchemaType is '--schematron'
+          messages = @parseSchematronMessages(output)
+        else
+          messages = @parseSchemaMessages(output)
+        for message in messages
+          message.type = 'Error'
+          message.text = message.text + ' (' + schemaUrl + ')'
+          message.filePath = textEditor.getPath()
           # make range the full line
-          error.range = helpers.rangeFromLineNumber(
-            textEditor, error.range[0][0], error.range[0][1])
-          return error
+          message.range = helpers.rangeFromLineNumber(
+            textEditor, message.range[0][0], message.range[0][1])
+        return messages
 
   parseMessages: (output) ->
     messages = []
@@ -217,5 +228,23 @@ module.exports =
         text: match.message
         filePath: match.file
         range: [[line, column], [line, column]]
+      })
+    return messages
+
+  parseSchemaMessages: (output) ->
+    regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
+    helpers.parse(output, regex)
+
+  parseSchematronMessages: (output) ->
+    messages = []
+    regex = XRegExp(
+      '^(?<rule>.+) ' +
+      'line (?<line>\\d+): ' +
+      '(?<message>.+)$', 'm')
+    XRegExp.forEach output, regex, (match, i) ->
+      line = parseInt(match.line) - 1
+      messages.push({
+        text: match.rule + ': ' + match.message
+        range: [[line, 0], [line, 0]]
       })
     return messages
