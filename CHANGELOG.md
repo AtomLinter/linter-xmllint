@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.3.0 (Jan 8 2016)
+
+* Add support for Relax NG and Schematron schemas ([#29](https://github.com/AtomLinter/linter-xmllint/issues/29))
+* Validate against all specified schemas ([#37](https://github.com/AtomLinter/linter-xmllint/pull/37))
+
 ## 1.2.0 (Dec 14 2015)
 
 * Add support for *lintOnFlyAdd* option ([#32](https://github.com/AtomLinter/linter-xmllint/pull/32))
