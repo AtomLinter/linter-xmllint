@@ -1,10 +1,10 @@
 {CompositeDisposable} = require 'atom'
-helpers = require 'atom-linter'
-path = require('path')
-sax = require('sax')
+helpers = null
+path = null
 Readable = require('stream').Readable
-xmldoc = require('xmldoc')
-XRegExp = require('xregexp').XRegExp
+sax = null
+xmldoc = null
+XRegExp = null
 
 class ReadableString extends Readable
 
@@ -27,7 +27,7 @@ module.exports =
       default: 'xmllint'
 
   activate: ->
-    require('atom-package-deps').install()
+    require('atom-package-deps').install('linter-xmllint')
 
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-xmllint.executablePath',
@@ -57,6 +57,7 @@ module.exports =
     return promise_well_formed.then validateIfWellFormed
 
   checkWellFormed: (textEditor) ->
+    helpers ?= require 'atom-linter'
     params = ['--noout', '-']
     options = {
       stdin: textEditor.getText()
@@ -77,6 +78,7 @@ module.exports =
     schemas = []
 
     promiseValidation = new Promise (resolve, reject) ->
+      sax ?= require 'sax'
       strict = true
       parser = sax.createStream(strict)
       # use a low value for the highWaterMark
@@ -87,6 +89,7 @@ module.exports =
         if procInst.name isnt 'xml-model'
           return
 
+        xmldoc ?= require 'xmldoc'
         # parse attributes from body
         try
           xmlDoc = new xmldoc.XmlDocument('<body ' + procInst.body + '/>')
@@ -169,6 +172,8 @@ module.exports =
     return promiseValidation
 
   validateDtd: (textEditor) ->
+    helpers ?= require 'atom-linter'
+    path ?= require('path')
     params = ['--noout', '--valid', '-']
     options = {
       # since the schema might be relative exec in the directory of the xml file
@@ -185,6 +190,8 @@ module.exports =
         return messages
 
   validateSchema: (textEditor, argSchemaType, schemaUrl) ->
+    helpers ?= require 'atom-linter'
+    path ?= require('path')
     params = []
     # --noout results in no error messages to be printed for schematron
     if argSchemaType is not '--schematron'
@@ -212,6 +219,7 @@ module.exports =
         return messages
 
   parseMessages: (output) ->
+    XRegExp ?= require('xregexp').XRegExp
     messages = []
     regex = XRegExp(
       '^(?<file>.+):' +
@@ -232,10 +240,12 @@ module.exports =
     return messages
 
   parseSchemaMessages: (output) ->
+    helpers ?= require 'atom-linter'
     regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
     helpers.parse(output, regex)
 
   parseSchematronMessages: (output) ->
+    XRegExp ?= require('xregexp').XRegExp
     messages = []
     regex = XRegExp(
       '^(?<rule>.+) ' +
