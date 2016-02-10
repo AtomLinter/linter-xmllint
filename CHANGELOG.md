@@ -1,5 +1,9 @@
 # Changelog linter-xmllint
 
+## 1.3.1 (Feb 10 2016)
+
+* Improve startup time ([#41](https://github.com/AtomLinter/linter-xmllint/pull/41))
+
 ## 1.3.0 (Jan 8 2016)
 
 * Add support for Relax NG and Schematron schemas ([#29](https://github.com/AtomLinter/linter-xmllint/issues/29))
