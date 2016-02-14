@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.3.2 (Feb 13 2016)
+
+* Fix marker text for DTD errors (regression in 1.3.0) ([#43](https://github.com/AtomLinter/linter-xmllint/pull/43))
+* Improve marker position and text for schemas and schematron ([#44](https://github.com/AtomLinter/linter-xmllint/pull/44))
+
 ## 1.3.1 (Feb 10 2016)
 
 * Improve startup time ([#41](https://github.com/AtomLinter/linter-xmllint/pull/41))
