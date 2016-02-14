@@ -185,7 +185,7 @@ module.exports =
       .then (output) =>
         messages = @parseMessages(output)
         for message in messages
-          message.text = textEditor.text + ' (DTD)'
+          message.text += ' (DTD)'
           message.filePath = textEditor.getPath()
         return messages
 
