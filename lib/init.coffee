@@ -206,16 +206,13 @@ module.exports =
     return helpers.exec(@executablePath, params, options)
       .then (output) =>
         if argSchemaType is '--schematron'
-          messages = @parseSchematronMessages(output)
+          messages = @parseSchematronMessages(textEditor, output)
         else
-          messages = @parseSchemaMessages(output)
+          messages = @parseSchemaMessages(textEditor, output)
         for message in messages
           message.type = 'Error'
           message.text = message.text + ' (' + schemaUrl + ')'
           message.filePath = textEditor.getPath()
-          # make range the full line
-          message.range = helpers.rangeFromLineNumber(
-            textEditor, message.range[0][0], message.range[0][1])
         return messages
 
   parseMessages: (output) ->
@@ -239,12 +236,15 @@ module.exports =
       })
     return messages
 
-  parseSchemaMessages: (output) ->
+  parseSchemaMessages: (textEditor, output) ->
     helpers ?= require 'atom-linter'
     regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
-    helpers.parse(output, regex)
+    messages = helpers.parse(output, regex)
+    for message in messages
+      message.range = helpers.rangeFromLineNumber(textEditor, message.range[0][0])
+    return messages
 
-  parseSchematronMessages: (output) ->
+  parseSchematronMessages: (textEditor, output) ->
     XRegExp ?= require('xregexp').XRegExp
     messages = []
     regex = XRegExp(
@@ -255,6 +255,6 @@ module.exports =
       line = parseInt(match.line) - 1
       messages.push({
         text: match.rule + ': ' + match.message
-        range: [[line, 0], [line, 0]]
+        range: helpers.rangeFromLineNumber(textEditor, line)
       })
     return messages
