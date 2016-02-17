@@ -222,8 +222,8 @@ module.exports =
       '^(?<file>.+):' +
       '(?<line>\\d+): ' +
       '(?<type>.+) : ' +
-      '(?<message>.+)[\\r?\\n]' +
-      '(?<source_line>.*)[\\r?\\n]' +
+      '(?<message>.+)\\r?\\n' +
+      '(?<source_line>.*)\\r?\\n' +
       '(?<marker>.*)\\^$', 'm')
     XRegExp.forEach output, regex, (match, i) ->
       line = parseInt(match.line) - 1
