@@ -1,5 +1,9 @@
 # Changelog linter-xmllint
 
+## 1.3.3 (Feb 17 2016)
+
+* Fix regex to work on Windows ([#49](https://github.com/AtomLinter/linter-xmllint/pull/49))
+
 ## 1.3.2 (Feb 13 2016)
 
 * Fix marker text for DTD errors (regression in 1.3.0) ([#43](https://github.com/AtomLinter/linter-xmllint/pull/43))
