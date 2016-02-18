@@ -15,15 +15,41 @@ The [changelog](https://github.com/AtomLinter/linter-xmllint/blob/master/CHANGEL
 
 Before using this package, you must ensure that `xmllint` is installed on your system. On recent versions of Mac OS X, `xmllint` comes pre-installed. To install `xmllint` on other platforms, do the following:
 
-1. On Linux:
+- On Linux:
 
      ```text
      [sudo] apt-get install libxml2-utils
      ```
 
-2. On Windows, follow the instructions [here](http://flowingmotion.jojordan.org/2011/10/08/3-steps-to-download-xmllint/). There is another version on code.google.com, but that version is incompatible with this plugin.
+- On Windows, 
+The current binary distribution is managed by Igor Zlatkovic ([here](https://www.zlatkovic.com/libxml.en.html "Igor Zlatkovic")) and there were some known issues with version 2.9.3 (20903) x86_64.  The validation messages did not contain the filename and would not work with this plugin.  The instructions below use the 2.7.8 (20708) x86 binary.
 
-Once `xmllint` is installed, you must ensure it is in your system PATH so that Linter can find it.
+	1. Pick a location where to store the required files
+    	- C:\tools\xmllint
+	2. Browse to ftp://ftp.zlatkovic.com/libxml/ to get the needed files.
+    	- If the versions are no longer available at root check the [oldreleases](ftp://ftp.zlatkovic.com/libxml/oldreleases/ "Old Releases") folder
+	3. Download the following files
+    	- iconv-1.9.2.win32.zip
+        - libxml2-2.7.8.win32.zip
+        - libxslt-1.1.26.win32.zip
+        - zlib-1.2.5.win32.zip
+	4. Extract all the files into the location we created above
+    	- C:\tools\xmllint
+	5. Add the bin directory to your path
+    	- C:\tools\xmllint\bin
+        - `setx path %PATH%;C:\tools\xmllint\bin`  
+        	- This is a CLI command that will attempt to add it to your path, if your path is really long it will fail and you will have to do it manually through windows.  Use quotes if your path has spaces.
+	6. Open a new command prompt and try the command `xmllint --version`  to see if it worked.  If it worked you will see the version be (20708).
+    
+- Example of extracted structure:
+	- C:\tools\xmllint\
+    	- bin
+        - include
+        - lib
+        - share
+    
+
+
 
 ## Installation
 
