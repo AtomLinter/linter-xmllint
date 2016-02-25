@@ -1,5 +1,9 @@
 # Changelog linter-xmllint
 
+## 1.3.4 (Feb 24 2016)
+
+* Update to XRegExp 3.1.0 ([#52](https://github.com/AtomLinter/linter-xmllint/pull/52))
+
 ## 1.3.3 (Feb 17 2016)
 
 * Fix regex to work on Windows ([#49](https://github.com/AtomLinter/linter-xmllint/pull/49))
