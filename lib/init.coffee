@@ -216,7 +216,7 @@ module.exports =
         return messages
 
   parseMessages: (output) ->
-    XRegExp ?= require('xregexp').XRegExp
+    XRegExp ?= require('xregexp')
     messages = []
     regex = XRegExp(
       '^(?<file>.+):' +
@@ -245,7 +245,7 @@ module.exports =
     return messages
 
   parseSchematronMessages: (textEditor, output) ->
-    XRegExp ?= require('xregexp').XRegExp
+    XRegExp ?= require('xregexp')
     messages = []
     regex = XRegExp(
       '^(?<rule>.+) ' +
