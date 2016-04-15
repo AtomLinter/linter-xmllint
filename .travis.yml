@@ -13,6 +13,7 @@ branches:
     - master
 
 before_script:
+  - apt-get install xmllint
   - xmllint --version
 
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
