@@ -15,27 +15,33 @@ script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.
 git:
   depth: 10
 
-language: node_js
-node_js: "5"
 
 matrix:
   include:
     - os: linux
+      env: ATOM_CHANNEL=stable
+      language: node_js
+      node_js: "5"
       sudo: required
       dist: trusty
       install:
         - sudo apt-get install libxml2-utils
-      env: ATOM_CHANNEL=stable
     - os: linux
+      env: ATOM_CHANNEL=beta
+      language: node_js
+      node_js: "5"
       sudo: required
       dist: trusty
       install:
         - sudo apt-get install libxml2-utils
-      env: ATOM_CHANNEL=beta
     - os: osx
       env: ATOM_CHANNEL=stable
+      language: node_js
+      node_js: "5"
     - os: osx
       env: ATOM_CHANNEL=beta
+      language: node_js
+      node_js: "5"
 
 addons:
   apt:
