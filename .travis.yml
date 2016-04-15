@@ -38,10 +38,6 @@ matrix:
       env: ATOM_CHANNEL=stable
       language: node_js
       node_js: "5"
-    - os: osx
-      env: ATOM_CHANNEL=beta
-      language: node_js
-      node_js: "5"
 
 addons:
   apt:
