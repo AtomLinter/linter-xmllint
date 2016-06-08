@@ -62,6 +62,7 @@ module.exports =
     options = {
       stdin: textEditor.getText()
       stream: 'stderr'
+      allowEmptyStderr: true
     }
     return helpers.exec(@executablePath, params, options)
       .then (output) =>
@@ -180,6 +181,7 @@ module.exports =
       cwd: path.dirname(textEditor.getPath())
       stdin: textEditor.getText()
       stream: 'stderr'
+      allowEmptyStderr: true
     }
     return helpers.exec(@executablePath, params, options)
       .then (output) =>
