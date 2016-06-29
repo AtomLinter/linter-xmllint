@@ -114,6 +114,12 @@ describe 'The xmllint provider for Linter', ->
           expect(messages.length).toEqual 1
           expect(messages[0].range).toEqual [[3, 2], [3, 21]]
     waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/invalid/xml-model-unavailable.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 1
+          expect(messages[0].range).toEqual undefined
+          expect(messages[0].text).toContain 'unavailable.xsd'
+    waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/relax-errors.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 2

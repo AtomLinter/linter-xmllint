@@ -211,10 +211,17 @@ module.exports =
           messages = @parseSchematronMessages(textEditor, output)
         else
           messages = @parseSchemaMessages(textEditor, output)
-        for message in messages
-          message.type = 'Error'
-          message.text = message.text + ' (' + schemaUrl + ')'
-          message.filePath = textEditor.getPath()
+        if messages.length
+          for message in messages
+            message.type = 'Error'
+            message.text = message.text + ' (' + schemaUrl + ')'
+            message.filePath = textEditor.getPath()
+        else if output.indexOf('- validates') is -1
+          messages.push({
+            type: 'Error'
+            text: output
+            filePath: textEditor.getPath()
+          })
         return messages
 
   parseMessages: (output) ->
