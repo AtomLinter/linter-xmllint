@@ -83,12 +83,12 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/noNamespaceSchemaLocation.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
-          expect(messages[0].range).toEqual [[9, 2], [9, 51]]
+          expect(messages[0].range).toEqual [[9, 3], [9, 7]]
     waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/schemaLocation.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
-          expect(messages[0].range).toEqual [[6, 2], [6, 21]]
+          expect(messages[0].range).toEqual [[6, 3], [6, 5]]
           expect(messages[0].text).toEqual "Element '{http://www.w3schools.com}to', " +
             "attribute 'id': The attribute 'id' is not allowed. (../note.xsd)"
     waitsForPromise ->
@@ -101,7 +101,7 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/xsd-error.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
-          expect(messages[0].range).toEqual [[10, 2], [10, 50]]
+          expect(messages[0].range).toEqual [[10, 3], [10, 7]]
     waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/dtd-error.xml').then (editor) ->
         return lint(editor).then (messages) ->
@@ -112,7 +112,7 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/xml-model-error.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
-          expect(messages[0].range).toEqual [[3, 2], [3, 21]]
+          expect(messages[0].range).toEqual [[3, 3], [3, 5]]
     waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/xml-model-unavailable.xml').then (editor) ->
         return lint(editor).then (messages) ->
@@ -123,9 +123,9 @@ describe 'The xmllint provider for Linter', ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/relax-errors.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 2
-          expect(messages[0].range).toEqual [[8, 2], [8, 11]]
+          expect(messages[0].range).toEqual [[8, 3], [8, 9]]
           expect(messages[0].text).toEqual 'Did not expect element footer there (../note.rng)'
-          expect(messages[1].range).toEqual [[7, 2], [7, 44]]
+          expect(messages[1].range).toEqual [[7, 3], [7, 7]]
           expect(messages[1].text).toEqual 'Did not expect element body there (../note2.rng)'
     waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/multiple-errors.xml').then (editor) ->
@@ -133,11 +133,11 @@ describe 'The xmllint provider for Linter', ->
           expect(messages.length).toEqual 3
           expect(messages[0].range).toEqual [[11, 11], [11, 11]]
           expect(messages[1].range).toEqual [[12, 7], [12, 7]]
-          expect(messages[2].range).toEqual [[10, 2], [10, 54]]
+          expect(messages[2].range).toEqual [[10, 3], [10, 7]]
     waitsForPromise ->
       return atom.workspace.open(__dirname + '/fixtures/invalid/schematron-errors.xml').then (editor) ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 2
-          expect(messages[0].range).toEqual [[2, 0], [2, 6]]
+          expect(messages[0].range).toEqual [[2, 1], [2, 5]]
           expect(messages[0].text).toEqual '/note: Note must have a "from" (../schematron.xml)'
-          expect(messages[1].range).toEqual [[2, 0], [2, 6]]
+          expect(messages[1].range).toEqual [[2, 1], [2, 5]]
