@@ -1,5 +1,11 @@
 # Changelog linter-xmllint
 
+## 1.3.5 (Jun 30 2016)
+
+* Make warnings from the linter available rather then ignoring them ([#62](https://github.com/AtomLinter/linter-xmllint/pull/62))
+* Update to AtomLinter 5.0.1 ([#59](https://github.com/AtomLinter/linter-xmllint/pull/59))
+* Update to xmldoc 0.5.0 ([#57](https://github.com/AtomLinter/linter-xmllint/pull/57))
+
 ## 1.3.4 (Feb 24 2016)
 
 * Update to XRegExp 3.1.0 ([#52](https://github.com/AtomLinter/linter-xmllint/pull/52))
