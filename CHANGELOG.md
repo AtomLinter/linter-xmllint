@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.3.6 (Sep 1 2016)
+
+* Fix regression to support .xsl files again ([#67](https://github.com/AtomLinter/linter-xmllint/pull/67))
+* Update to AtomLinter 8.0.0 ([#65](https://github.com/AtomLinter/linter-xmllint/pull/65))
+
 ## 1.3.5 (Jun 30 2016)
 
 * Make warnings from the linter available rather then ignoring them ([#62](https://github.com/AtomLinter/linter-xmllint/pull/62))
