@@ -40,7 +40,7 @@ module.exports =
   provideLinter: ->
     provider =
       name: 'xmllint'
-      grammarScopes: ['text.xml']
+      grammarScopes: ['text.xml', 'text.xml.xsl']
       scope: 'file'
       lintOnFly: true
       lint: (textEditor) =>
