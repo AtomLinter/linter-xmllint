@@ -1,5 +1,9 @@
 # Changelog linter-xmllint
 
+## 1.4.0 (Dec 6 2016)
+
+* Add configuration options to disable specific validator types ([#70](https://github.com/AtomLinter/linter-xmllint/pull/70))
+
 ## 1.3.6 (Sep 1 2016)
 
 * Fix regression to support .xsl files again ([#67](https://github.com/AtomLinter/linter-xmllint/pull/67))
