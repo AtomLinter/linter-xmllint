@@ -289,7 +289,7 @@ module.exports =
     regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
     messages = helpers.parse(output, regex)
     for message in messages
-      message.range = helpers.rangeFromLineNumber(textEditor, message.range[0][0])
+      message.range = helpers.generateRange(textEditor, message.range[0][0])
     return messages
 
   parseSchematronMessages: (textEditor, output) ->
@@ -303,6 +303,6 @@ module.exports =
       line = parseInt(match.line) - 1
       messages.push({
         text: match.rule + ': ' + match.message
-        range: helpers.rangeFromLineNumber(textEditor, line)
+        range: helpers.generateRange(textEditor, line)
       })
     return messages
