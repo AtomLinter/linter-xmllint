@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.4.1 (Mar 03 2017)
+
+* Update `xmldoc` to v1.0.0 ([#72](https://github.com/AtomLinter/linter-xmllint/pull/72))
+* Update `atom-linter` to v9.0.0 ([#73](https://github.com/AtomLinter/linter-xmllint/pull/73))
+
 ## 1.4.0 (Dec 6 2016)
 
 * Add configuration options to disable specific validator types ([#70](https://github.com/AtomLinter/linter-xmllint/pull/70))

@@ -1,7 +1,7 @@
 {
   "name": "linter-xmllint",
   "main": "./lib/init",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Lint XML on the fly, using xmllint",
   "repository": "https://github.com/AtomLinter/linter-xmllint",
   "license": "MIT",
