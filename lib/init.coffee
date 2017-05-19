@@ -75,7 +75,7 @@ module.exports =
       name: 'xmllint'
       grammarScopes: ['text.xml', 'text.xml.xsl']
       scope: 'file'
-      lintOnFly: true
+      lintsOnChange: true
       lint: (textEditor) =>
         return @lintOpenFile textEditor
 
@@ -101,7 +101,7 @@ module.exports =
       .then (output) =>
         messages = @parseMessages(output)
         for message in messages
-          message.filePath = textEditor.getPath()
+          message.location.file = textEditor.getPath()
         return messages
 
   checkValid: (textEditor) ->
@@ -226,8 +226,8 @@ module.exports =
       .then (output) =>
         messages = @parseMessages(output)
         for message in messages
-          message.text += ' (DTD)'
-          message.filePath = textEditor.getPath()
+          message.excerpt += ' (DTD)'
+          message.location.file = textEditor.getPath()
         return messages
 
   validateSchema: (textEditor, argSchemaType, schemaUrl) ->
@@ -252,14 +252,17 @@ module.exports =
           messages = @parseSchemaMessages(textEditor, output)
         if messages.length
           for message in messages
-            message.type = 'Error'
-            message.text = message.text + ' (' + schemaUrl + ')'
-            message.filePath = textEditor.getPath()
+            message.severity = 'error'
+            message.excerpt = message.excerpt + ' (' + schemaUrl + ')'
+            message.location.file = textEditor.getPath()
         else if output.indexOf('- validates') is -1
           messages.push({
-            type: 'Error'
-            text: output
-            filePath: textEditor.getPath()
+            severity: 'error'
+            excerpt: output
+            location: {
+              file: textEditor.getPath()
+              position: [[0, 0], [0, 0]]
+            }
           })
         return messages
 
@@ -269,7 +272,7 @@ module.exports =
     regex = XRegExp(
       '^(?<file>.+):' +
       '(?<line>\\d+): ' +
-      '(?<type>.+) : ' +
+      '(?<severity>.+) : ' +
       '(?<message>.+)\\r?\\n' +
       '(?<source_line>.*)\\r?\\n' +
       '(?<marker>.*)\\^$', 'm')
@@ -277,10 +280,12 @@ module.exports =
       line = parseInt(match.line) - 1
       column = match.marker.length
       messages.push({
-        type: 'Error'
-        text: match.message
-        filePath: match.file
-        range: [[line, column], [line, column]]
+        severity: 'error'
+        excerpt: match.message
+        location: {
+          file: match.file
+          position: [[line, column], [line, column]]
+        }
       })
     return messages
 
@@ -289,7 +294,19 @@ module.exports =
     regex = '(?<file>.+):(?<line>\\d+): .*: .* : (?<message>.+)'
     messages = helpers.parse(output, regex)
     for message in messages
-      message.range = helpers.generateRange(textEditor, message.range[0][0])
+      message.severity = message.type
+      delete message.type
+
+      message.excerpt = message.text
+      delete message.text
+
+      message.location = {
+        file: message.filePath
+      }
+      delete message.filePath
+
+      message.location.position = helpers.generateRange(textEditor, message.range[0][0])
+      delete message.range
     return messages
 
   parseSchematronMessages: (textEditor, output) ->
@@ -302,7 +319,9 @@ module.exports =
     XRegExp.forEach output, regex, (match, i) ->
       line = parseInt(match.line) - 1
       messages.push({
-        text: match.rule + ': ' + match.message
-        range: helpers.generateRange(textEditor, line)
+        excerpt: match.rule + ': ' + match.message
+        location: {
+          position: helpers.generateRange(textEditor, line)
+        }
       })
     return messages
