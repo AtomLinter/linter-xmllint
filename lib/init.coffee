@@ -253,7 +253,10 @@ module.exports =
         if messages.length
           for message in messages
             message.severity = 'error'
-            message.excerpt = message.excerpt + ' (' + schemaUrl + ')'
+            if schemaUrl.includes('://')
+              message.url = schemaUrl
+            else
+              message.excerpt = message.excerpt + ' (' + schemaUrl + ')'
             message.location.file = textEditor.getPath()
         else if output.indexOf('- validates') is -1
           messages.push({
