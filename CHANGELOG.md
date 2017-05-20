@@ -1,5 +1,10 @@
 # Changelog linter-xmllint
 
+## 1.4.2 (May 20 2017)
+
+* Update `linter` to v2.0.0, Update `atom-package-deps` to v4.6.0 ([#79](https://github.com/AtomLinter/linter-xmllint/pull/79))
+* Update `atom-linter` to v10.0.0 ([#78](https://github.com/AtomLinter/linter-xmllint/pull/78))
+
 ## 1.4.1 (Mar 03 2017)
 
 * Update `xmldoc` to v1.0.0 ([#72](https://github.com/AtomLinter/linter-xmllint/pull/72))
