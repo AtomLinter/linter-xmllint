@@ -30,6 +30,11 @@ describe 'The xmllint provider for Linter', ->
         return lint(editor).then (messages) ->
           expect(messages.length).toEqual 1
           expect(messages[0].location.position).toEqual [[3, 8], [3, 8]]
+    waitsForPromise ->
+      return atom.workspace.open(__dirname + '/fixtures/not-well-formed2.xml').then (editor) ->
+        return lint(editor).then (messages) ->
+          expect(messages.length).toEqual 1
+          expect(messages[0].location.position).toEqual [[0, 0], [0, 0]]
 
   it 'finds nothing wrong with valid files', ->
     waitsForPromise ->

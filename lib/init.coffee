@@ -276,12 +276,16 @@ module.exports =
       '^(?<file>.+):' +
       '(?<line>\\d+): ' +
       '(?<severity>.+) : ' +
-      '(?<message>.+)\\r?\\n' +
+      '(?<message>.+)' +
+      '(' +  # some error might not contain a newline, source line and marker
+      '\\r?\\n' +
       '(?<source_line>.*)\\r?\\n' +
-      '(?<marker>.*)\\^$', 'm')
+      '(?<marker>.*)\\^' +
+      ')?' +  # end optional part
+      '$', 'm')
     XRegExp.forEach output, regex, (match, i) ->
       line = parseInt(match.line) - 1
-      column = match.marker.length
+      column = if match.marker then match.marker.length else 0
       messages.push({
         severity: 'error'
         excerpt: match.message
