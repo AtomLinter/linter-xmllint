@@ -119,6 +119,26 @@ module.exports =
       # since we can't abort parsing what has already been read
       stream = new ReadableString(textEditor.getText(), {highWaterMark: 128})
 
+      parser.onerror = (e) ->
+        console.warn 'onerror', e
+
+        # clear error to prevent throwing an exception
+        parser.error = null
+
+        # stop reading more data
+        stream.unpipe()
+        stream.content = ''
+
+        # report the error
+        resolve([{
+          severity: 'error'
+          excerpt: e.toString()
+          location: {
+            file: textEditor.getPath()
+            position: [[0, 0], [0, 0]]
+          }
+        }])
+
       parser.onprocessinginstruction = (procInst) ->
         if procInst.name isnt 'xml-model'
           return
