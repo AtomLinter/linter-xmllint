@@ -1,5 +1,9 @@
 # Changelog linter-xmllint
 
+## 1.4.4 (May 12 2018)
+
+* Catch errors from the SAX parser to report an error instead of resulting in a stacktrace ([#94](https://github.com/AtomLinter/linter-xmllint/pull/94))
+
 ## 1.4.3 (Jun 7 2017)
 
 * Detect error messages without a newline, source line, and marker ([#82](https://github.com/AtomLinter/linter-xmllint/pull/82))
