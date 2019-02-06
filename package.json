@@ -30,5 +30,10 @@
         "2.0.0": "provideLinter"
       }
     }
+  },
+  "renovate": {
+    "extends": [
+      "config:base"
+    ]
   }
 }
