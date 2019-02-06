@@ -16,12 +16,19 @@
     "xregexp": "^3.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^6.1.3",
+    "@commitlint/config-conventional": "^6.1.3",
+    "@commitlint/travis-cli": "^6.1.3",
+    "@semantic-release/apm-config": "^2.0.1",
+    "husky": "^0.14.3",
+    "semantic-release": "^15.1.7",
     "coffeelint": "^1.13.1"
   },
   "package-deps": [
     "linter:2.0.0"
   ],
   "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "lint": "./node_modules/.bin/coffeelint lib spec"
   },
   "providedServices": {
@@ -30,5 +37,13 @@
         "2.0.0": "provideLinter"
       }
     }
+  },
+  "release": {
+    "extends": "@semantic-release/apm-config"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
