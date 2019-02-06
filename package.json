@@ -13,7 +13,7 @@
     "atom-package-deps": "^5.0.0",
     "sax": "^1.1.4",
     "xmldoc": "^1.0.0",
-    "xregexp": "^3.1.0"
+    "xregexp": "^4.0.0"
   },
   "devDependencies": {
     "coffeelint": "2.1.0"
